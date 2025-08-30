@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 const MENUS = [
   { href: "/", label: "홈" },
   { href: "/schedule", label: "방송일정" },
-  { href: "/ranking", label: "랭킹" },
   { href: "/categories", label: "카테고리" },
 ];
 

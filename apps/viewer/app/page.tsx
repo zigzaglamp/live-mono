@@ -1,86 +1,123 @@
-"use client";
+// apps/viewer/app/page.tsx  (홈)
+import BannerNaverSlider, {
+  type BannerItem,
+} from "@/components/design/BannerNaverSlider";
+import BannerMobileRail from "@/components/design/BannerMobileRail";
 
-import { useMemo, useState } from "react";
-import { Section, Chip } from "@/components/ui";
-import { liveCards, categories as dataCategories } from "@/components/data";
-import { LiveCard } from "@/components/design/LiveCard";
-import BannerSlider from "@/components/design/BannerSlider";
-import type { Category } from "@/components/types";
+// ▼ 추가 임포트
+import { Section } from "@/components/ui";
+import { products } from "@/components/data";
+import { ProductCard } from "@/components/design/LiveCard";
 
-const banners = [
+
+// 데스크톱용 배너 데이터 (기존과 동일 구조)
+const desktopBanners: BannerItem[] = [
   {
     id: "b1",
-    title: "놓치면 아쉬운 생방 혜택!",
-    subtitle: "지금 시청하면 라이브 쿠폰 즉시 적용",
-    cta: "지금 보러가기",
-    thumb: "/banners/1.jpg",  // ← public 폴더에 넣은 이미지 경로
+    status: "live",
+    timeLabel: "내일 오후 7시",
+    title: "투티터 ~91% 역대급 세일",
+    watchers: "40.2만명이 시청중",
+    channel: "FD1OR",
+    thumb: "/banners/1.jpg",
+    goods: [
+      { id: "g1", img: "/banners/1.png", sale: "83%", price: "₩16,900" },
+      { id: "g2", img: "/banners/2.png", sale: "77%", price: "₩17,900" },
+      { id: "g3", img: "/banners/3.png", sale: "74%", price: "₩17,900" },
+    ],
+    cta: "알림받기",
   },
   {
     id: "b2",
-    title: "주말 특집 ✨ 초특가 라이브",
-    subtitle: "최대 60% 세일 + 무료배송",
-    thumb: "/banners/2.png",
+    status: "scheduled",
+    timeLabel: "내일 오후 10시",
+    title: "투티터 ~91% 역대급 세일",
+    watchers: "40.2만명이 기다리는 중",
+    channel: "FD1OR",
+    thumb: "/banners/1.png",
+    goods: [
+      { id: "g1", img: "/banners/1.png", sale: "83%", price: "₩16,900" },
+      { id: "g2", img: "/banners/2.png", sale: "77%", price: "₩17,900" },
+      { id: "g3", img: "/banners/3.png", sale: "74%", price: "₩17,900" },
+    ],
+    cta: "알림받기",
   },
   {
     id: "b3",
-    title: "신규 브랜드 런칭 🎉",
-    subtitle: "팔로우하고 알림 받기",
+    status: "scheduled",
+    timeLabel: "내일 오후 11시",
+    title: "투티터 ~91% 역대급 세일",
+    watchers: "40.2만명이 기다리는 중",
+    channel: "FD1OR",
     thumb: "/banners/3.png",
+    goods: [
+      { id: "g1", img: "/banners/1.png", sale: "83%", price: "₩16,900" },
+      { id: "g2", img: "/banners/2.png", sale: "77%", price: "₩17,900" },
+      { id: "g3", img: "/banners/3.png", sale: "74%", price: "₩17,900" },
+    ],
+    cta: "알림받기",
   },
+  {
+    id: "b4",
+    status: "live",
+    timeLabel: "내일 오후 1시",
+    title: "투티터 ~91% 역대급 세일",
+    watchers: "40.2만명이 시청중",
+    channel: "FD1OR",
+    thumb: "/banners/2.png",
+    goods: [
+      { id: "g1", img: "/banners/1.png", sale: "83%", price: "₩16,900" },
+      { id: "g2", img: "/banners/2.png", sale: "77%", price: "₩17,900" },
+      { id: "g3", img: "/banners/3.png", sale: "74%", price: "₩17,900" },
+    ],
+    cta: "알림받기",
+  },
+  {
+    id: "b5",
+    status: "live",
+    timeLabel: "내일 오후 2시",
+    title: "투티터 ~91% 역대급 세일",
+    watchers: "40.2만명이 시청중",
+    channel: "FD1OR",
+    thumb: "/banners/3.png",
+    goods: [
+      { id: "g1", img: "/banners/1.png", sale: "83%", price: "₩16,900" },
+      { id: "g2", img: "/banners/2.png", sale: "77%", price: "₩17,900" },
+      { id: "g3", img: "/banners/3.png", sale: "74%", price: "₩17,900" },
+    ],
+    cta: "알림받기",
+  },
+  // ...원하면 더 추가
 ];
 
-export default function Page() {
-  // 데이터는 dataCategories를 사용하되, 타입은 Category[]로 명시
-  const categories = dataCategories as unknown as Category[];
-
-  const [active, setActive] = useState<string>("all");
-
-  const filtered = useMemo(() => {
-    if (active === "all") return liveCards as any[];
-    const activeLabel = categories.find((c) => c.id === active)?.name ?? active;
-    // liveCards.item.category가 라벨(한글)이라면 아래 비교로 필터
-    return (liveCards as any[]).filter(
-      (l) => l.category === active || l.category === activeLabel
-    );
-  }, [active, categories]);
-
+export default function HomePage() {
   return (
-    <div className="pb-10">
-      <BannerSlider items={banners} />
+    <main className="mx-auto w-full max-w-[1280px]">
+      {/* 섹션 타이틀 */}
+      <h1 className="px-4 pt-6 text-2xl font-extrabold lg:px-0">오늘 놓치지 마세요!</h1>
 
-      {/* 카테고리 칩: 모바일 가로 스크롤 + z-index로 배너보다 위 */}
-      <div className="relative z-10 mt-4">
-        <div className="-mx-4 overflow-x-auto px-4 py-3 md:mx-0 md:px-0 md:py-4">
-          <div className="flex gap-2 md:justify-center">
-            {categories.map((c) => {
-              const activeChip = active === c.id;
-              return (
-                <button
-                  key={c.id}
-                  onClick={() => setActive(c.id)}
-                  aria-pressed={activeChip}
-                  className={`chip-tab ${activeChip ? "chip-tab-active" : ""} shrink-0`}
-                >
-                  {c.emoji} {c.name}
-                </button>
-              );
-            })}
-          </div>
+      {/* 모바일 전용 */}
+      <div className="block lg:hidden">
+        <BannerMobileRail items={desktopBanners} />
+      </div>
+
+      {/* 데스크톱: 중앙 카드형 슬라이더 */}
+      <div className="hidden lg:block">
+        <div className="mt-4">
+          <BannerNaverSlider items={desktopBanners} interval={5000} />
         </div>
       </div>
 
-
-
-      <Section
-        title="바로 지금! 라이브 찬스"
-        action={<a className="btn btn-soft h-9" href="#live-now">더보기</a>}
-      >
-        <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
-          {filtered.slice(0, 8).map((item: any) => (
-            <LiveCard key={item.id} item={item} />
+      {/* ▼ 추가: 라이브 상품 TOP 100 */}
+      <Section title="라이브 상품 TOP 100">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+          {products.slice(0, 8).map((p) => (
+            <ProductCard key={p.id} item={p} />
           ))}
         </div>
       </Section>
-    </div>
+
+      {/* 이하 다른 섹션들 … */}
+    </main>
   );
 }

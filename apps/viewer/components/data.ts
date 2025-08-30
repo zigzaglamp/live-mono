@@ -36,6 +36,7 @@ export const products = Array.from({ length: 12 }).map((_, i) => ({
   id: `P${i + 1}`,
   name: `프리미엄 수박 ${i + 1}팩`,
   badge: i % 3 === 0 ? "LIVE 특가" : i % 3 === 1 ? "무료배송" : "한정수량",
+  category: categories[(i % (categories.length - 1)) + 1].name,
   price: 22800 + i * 1200,
   sale: 18900 + i * 1000,
 }));

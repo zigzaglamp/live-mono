@@ -100,7 +100,7 @@ body {
 
   /* --- 탭(상단 네비 등) --- */
   .tab { @apply px-3 py-2 text-sm font-medium text-neutral-700 border-b-2 border-transparent hover:text-neutral-900; }
-  .tab-active { @apply border-b-[3px] border-violet-500 text-neutral-900; }z
+  .tab-active { @apply border-b-[3px] border-violet-500 text-neutral-900; }
   
   /* 기본 칩 */
   .chip-tab { 
@@ -116,16 +116,16 @@ body {
            border-b-[3px]; 
   }
 
+  .chip-tab-active-go { @apply border-violet-500 text-neutral-900; }
+
     /* 기본 칩 */
-  .chip-tab-go { 
-    @apply rounded px-2 py-2 text-sm text-neutral-700 
-           bg-white border border-neutral-300 shadow-sm
+  .chip-tab-go-go { 
+    @apply rounded px-1 py-1 text-sm text-rose-500
+           bg-white border border-rose-500 shadow-sm
            hover:shadow-md hover:bg-neutral-50 
            transition-all;
   }
-
-  .chip-tab-active-go { @apply border-violet-500 text-neutral-900; }
-
+  
   /* 소형 버튼 (CTA가 카드 내부에 자연스럽게 들어가도록) */
   .btn-sm { @apply h-8 px-3 text-[13px] rounded-lg; }
 
@@ -158,5 +158,27 @@ body {
     border-radius: 9999px;
     background-image: linear-gradient(to right, #8b5cf6, #d946ef); /* violet-500 -> fuchsia-500 */
   }
-
+      /* 액션 칩(구매/장바구니/공유 공용) */
+  .chip-action {
+    @apply inline-flex items-center justify-center h-10 px-4 rounded-lg text-sm font-semibold
+           border border-neutral-300 bg-white text-neutral-800 shadow-sm
+           transition-all duration-200 ease-out;
+    /* 살짝 떠오르는 느낌을 위한 초기 상태 */
+    transform: translateY(0);
+  }
+  .chip-action:hover {
+    @apply shadow-md;
+    /* 호버 시 그라데이션로 전환 */
+    color: #fff;
+    border-color: transparent;
+    background-image: linear-gradient(to right, rgb(139 92 246), rgb(217 70 239)); /* violet→fuchsia */
+    transform: translateY(-1px);
+  }
+  .chip-action:active {
+    transform: translateY(0);
+    filter: brightness(0.98);
+  }
+  .chip-action:focus-visible {
+    @apply outline-none ring-2 ring-violet-300;
+  }
 }

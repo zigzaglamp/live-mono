@@ -2,7 +2,7 @@
 "use client";
 import Link from "next/link";
 import { KRW } from "../data";
-import LiveBadges from "./LiveBadges"; // ⬅️ 추가 (경로는 프로젝트 구조에 맞게)
+import Image from "next/image";
 
 const formatInt = (n: number) =>
   n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -14,24 +14,37 @@ export interface LiveItem {
   category: string;
   viewers: number;
   discount: number; // %
-  price: number; // 원가
+  price: number;    // 원가
 }
 
 export interface ProductItem {
   id: string;
   badge?: string;
   name: string;
-  price: number; // 정가
-  sale: number; // 판매가
+  price: number;    // 정가
+  sale: number;     // 판매가
+  category?: string; // ← 추가
 }
 
 export function LiveCard({ item }: { item: LiveItem }) {
   const final = (item.price * (100 - item.discount)) / 100;
 
   return (
-    <article className="card-surface overflow-hidden"> {/* ← card-surface로 교체 */}
-      <Link href={`/live/${item.id}`} className="relative block aspect-[4/3] bg-neutral-200">
-        {/* 좌상단: LIVE + 시청자수 묶음 */}
+    <article className="card-surface overflow-hidden">
+       <Link
+        href={`/live/${item.id}`}
+        className="relative block aspect-[4/3] overflow-hidden rounded-t-2xl bg-neutral-200"
+       >
+        {/* 썸네일 이미지 (테스트용) */}
+        <Image
+          src="/banners/1.png"   // ← public/banners/1.png
+          alt={item.title}
+          width={400}
+          height={300}
+          className="h-full w-full object-cover"
+        />
+
+        {/* 좌상단: LIVE + 시청자수 */}
         <div className="pill-row">
           <span className="pill-live">LIVE</span>
           <span className="pill-viewers">
@@ -49,32 +62,33 @@ export function LiveCard({ item }: { item: LiveItem }) {
         </h4>
         <div className="mt-1 flex items-baseline gap-2">
           <span className="text-rose-600 font-bold">{item.discount}%</span>
-          <span className="text-neutral-900 font-semibold tabular-nums">{KRW(final)}</span>
+          <span className="text-neutral-900 font-semibold tabular-nums">
+            {KRW(final)}
+          </span>
         </div>
       </div>
     </article>
   );
 }
 
-
-// ── ProductCard (리디자인 반영) ─────────────────
-export function ProductCard({
-  item,
-}: {
-  item: ProductItem;
-}) {
+// ── ProductCard ─────────────────
+export function ProductCard({ item }: { item: ProductItem }) {
   return (
-    <article className="card-surface"> {/* overflow-visible 포함 */}
-      <div className="aspect-[4/3] bg-neutral-100 rounded-t-2xl" />
+    <article className="card-surface">
+      <div className="aspect-[4/3] overflow-hidden rounded-t-2xl bg-neutral-100">
+        <Image
+          src="/banners/1.jpg"   // 필요 시 /public 경로로 교체
+          alt={item.name}
+          width={400}
+          height={300}
+          className="h-full w-full object-cover"
+        />
+      </div>
 
       <div className="p-3">
-        {/* 상단 보조 배지(세일 등)는 기존 톤 유지 */}
-        <div className="text-xs text-emerald-700 font-semibold">{item.badge}</div>
-
-        {/* 제목에 밑줄 포커스(네비와 동일 계열) */}
+        <div className="text-xs text-emerald-700 font-semibold">{item.badge} · {item.category}</div>
         <h4 className="mt-1 font-semibold line-clamp-2">{item.name}</h4>
 
-        {/* 정가/세일가 */}
         <div className="mt-1 text-xs text-neutral-500 line-through tabular-nums">
           {KRW(item.price)}
         </div>
