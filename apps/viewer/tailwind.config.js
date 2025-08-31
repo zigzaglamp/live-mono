@@ -1,13 +1,12 @@
-// tailwind.config.ts 권장
-import type { Config } from "tailwindcss";
-
+// apps/viewer/tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 export default {
   content: [
-    "./app/**/*.{ts,tsx,js,jsx,mdx}",
-    "./components/**/*.{ts,tsx,js,jsx,mdx}",
-    "./pages/**/*.{ts,tsx,js,jsx,mdx}",
-    "./src/**/*.{ts,tsx,js,jsx,mdx}",
+    "./app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./features/**/*.{js,ts,jsx,tsx,mdx}",
+    "./pages/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: { extend: {} },
   plugins: [],
-} satisfies Config;
+};

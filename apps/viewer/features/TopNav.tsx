@@ -1,5 +1,6 @@
-"use client";
+// apps/viewer/features/TopNav.tsx
 
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -10,12 +11,14 @@ const MENUS = [
 ];
 
 export default function TopNav() {
+
   const path = usePathname();
 
   return (
     <header className="sticky top-0 z-40 w-full border-b bg-white/80 backdrop-blur">
       <div className="mx-auto max-w-screen-xl px-4">
         <div className="flex h-14 items-center gap-3">
+
           {/* 로고 */}
           <Link href="/" className="text-lg font-extrabold tracking-tight whitespace-nowrap">
             고운 수박 <span className="text-rose-600">LIVE</span>

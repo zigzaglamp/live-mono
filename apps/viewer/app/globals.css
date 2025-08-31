@@ -21,8 +21,8 @@
 }
 
 /* 반응형으로 토큰만 키우면 전체 밀도도 함께 조정됩니다 */
-@media (min-width: 768px){
-  :root{
+@media (min-width: 768px) {
+  :root {
     --page-x: 24px;
     --page-y: 16px;
     --stack: 28px;
@@ -30,8 +30,9 @@
     --slab-p: 16px;
   }
 }
-@media (min-width: 1280px){
-  :root{
+
+@media (min-width: 1280px) {
+  :root {
     --page-x: 32px;
     --page-y: 20px;
     --stack: 36px;
@@ -51,12 +52,15 @@
 .site {
   padding: var(--page-y) var(--page-x);
 }
-.site > * + * {
+
+.site>*+* {
   margin-top: var(--stack);
 }
 
 /* “카드/슬랩” 느낌의 박스에 공통 안쪽 여백을 줄 때 쓰는 선택적 클래스 */
-.slab { padding: var(--slab-p); }
+.slab {
+  padding: var(--slab-p);
+}
 
 /* 대부분의 그리드 간격을 한 번에 넉넉하게 – 
    필요 시 .no-global-gap 로 개별 예외 처리 */
@@ -65,7 +69,9 @@
 }
 
 /* 리스트·스택형 컨테이너에 쓸 수 있는 전역 유틸(선택사항) */
-.flow > * + * { margin-top: var(--stack); }
+.flow>*+* {
+  margin-top: var(--stack);
+}
 
 
 body {
@@ -74,13 +80,26 @@ body {
 }
 
 @layer components {
+
   /* 공통 버튼 */
-  .btn { @apply inline-flex items-center justify-center h-10 px-4 rounded-xl text-sm font-semibold shadow-sm ring-1 ring-black/5 transition-all duration-200; }
-  .btn-soft { @apply bg-neutral-100 text-neutral-900 border border-neutral-300 hover:shadow-md active:scale-95; }
+  .btn {
+    @apply inline-flex items-center justify-center h-10 px-4 rounded-xl text-sm font-semibold shadow-sm ring-1 ring-black/5 transition-all duration-200;
+  }
+
+  .btn-soft {
+    @apply bg-neutral-100 text-neutral-900 border border-neutral-300 hover:shadow-md active:scale-95;
+  }
 
   /* 보라 그라데이션 (활성/강조용) */
-  .btn-violet { @apply text-white border-0; }
-  .btn-violet { background-image: linear-gradient(to right, rgb(139 92 246), rgb(217 70 239)); } /* violet-500 → fuchsia-500 */
+  .btn-violet {
+    @apply text-white border-0;
+  }
+
+  .btn-violet {
+    background-image: linear-gradient(to right, rgb(139 92 246), rgb(217 70 239));
+  }
+
+  /* violet-500 → fuchsia-500 */
 
   /* 소프트 → hover 시 보라 그라데이션 */
   .btn-soft-violet:hover {
@@ -90,65 +109,94 @@ body {
   }
 
   /* 탭/칩 */
-  .chip { @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-all; }
-  .chip-default { @apply bg-white border-neutral-200 hover:bg-neutral-100; }
-  .chip-active  { @apply text-white border-transparent shadow-sm; }
-  .chip-active { background-image: linear-gradient(to right, rgb(139 92 246), rgb(217 70 239)); } /* 보라 그라데이션 */
+  .chip {
+    @apply inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm transition-all;
+  }
+
+  .chip-default {
+    @apply bg-white border-neutral-200 hover:bg-neutral-100;
+  }
+
+  .chip-active {
+    @apply text-white border-transparent shadow-sm;
+  }
+
+  .chip-active {
+    background-image: linear-gradient(to right, rgb(139 92 246), rgb(217 70 239));
+  }
+
+  /* 보라 그라데이션 */
 
   /* 배너 내 좌/우 화살표 버튼 */
-  .nav-arrow { @apply grid h-9 w-9 place-items-center rounded-full bg-white/85 shadow hover:bg-white transition-colors; }
+  .nav-arrow {
+    @apply grid h-9 w-9 place-items-center rounded-full bg-white/85 shadow hover:bg-white transition-colors;
+  }
 
   /* --- 탭(상단 네비 등) --- */
-  .tab { @apply px-3 py-2 text-sm font-medium text-neutral-700 border-b-2 border-transparent hover:text-neutral-900; }
-  .tab-active { @apply border-b-[3px] border-violet-500 text-neutral-900; }
-  
+  .tab {
+    @apply px-3 py-2 text-sm font-medium text-neutral-700 border-b-2 border-transparent hover:text-neutral-900;
+  }
+
+  .tab-active {
+    @apply border-b-[3px] border-violet-500 text-neutral-900;
+  }
+
   /* 기본 칩 */
-  .chip-tab { 
-    @apply rounded-full px-4 py-2 text-sm text-neutral-700 
-           bg-white border border-neutral-300 shadow-sm
-           hover:shadow-md hover:bg-neutral-50 
-           transition-all;
+  .chip-tab {
+    @apply rounded-full px-4 py-2 text-sm text-neutral-700 bg-white border border-neutral-300 shadow-sm hover:shadow-md hover:bg-neutral-50 transition-all;
   }
 
   /* 활성 칩 */
-  .chip-tab-active { 
-    @apply border-violet-500 text-neutral-900 shadow-md 
-           border-b-[3px]; 
+  .chip-tab-active {
+    @apply border-violet-500 text-neutral-900 shadow-md border-b-[3px];
   }
 
-  .chip-tab-active-go { @apply border-violet-500 text-neutral-900; }
-
-    /* 기본 칩 */
-  .chip-tab-go-go { 
-    @apply rounded px-1 py-1 text-sm text-rose-500
-           bg-white border border-rose-500 shadow-sm
-           hover:shadow-md hover:bg-neutral-50 
-           transition-all;
+  .chip-tab-active-go {
+    @apply border-violet-500 text-neutral-900;
   }
-  
+
+  /* 기본 칩 */
+  .chip-tab-go-go {
+    @apply rounded px-1 py-1 text-sm text-rose-500 bg-white border border-rose-500 shadow-sm hover:shadow-md hover:bg-neutral-50 transition-all;
+  }
+
   /* 소형 버튼 (CTA가 카드 내부에 자연스럽게 들어가도록) */
-  .btn-sm { @apply h-8 px-3 text-[13px] rounded-lg; }
+  .btn-sm {
+    @apply h-8 px-3 text-[13px] rounded-lg;
+  }
 
   /* 카드 컨테이너: 상단 배지 잘리지 않게 overflow-visible */
-  .card-surface { @apply relative overflow-visible rounded-2xl border border-neutral-200 bg-white shadow-sm; }
+  .card-surface {
+    @apply relative overflow-visible rounded-2xl border border-neutral-200 bg-white shadow-sm;
+  }
 
   /* 좌상단 LIVE + 시청자 묶음 */
-  .pill-row { @apply absolute left-2 top-2 z-20 flex items-center gap-1; }
+  .pill-row {
+    @apply absolute left-2 top-2 z-20 flex items-center gap-1;
+  }
 
   .pill-live {
     @apply inline-flex h-6 items-center rounded-full px-2.5 text-[11px] font-bold text-white shadow;
-    background-image: linear-gradient(to right, #ef4444, #f97316); /* red->orange */
+    background-image: linear-gradient(to right, #ef4444, #f97316);
+    /* red->orange */
   }
 
   /* (수정) 회색/갈색 제거 → 로즈↔바이올렛로 통일 */
   .pill-viewers {
     @apply inline-flex h-6 items-center rounded-full px-2.5 text-[11px] font-semibold text-white shadow;
-    background-image: linear-gradient(to right, #2d2fa8, #52aeca); /* rose-400 -> violet-500 */
+    background-image: linear-gradient(to right, #2d2fa8, #52aeca);
+    /* rose-400 -> violet-500 */
   }
-  .pill-viewers .num { font-variant-numeric: tabular-nums; }
+
+  .pill-viewers .num {
+    font-variant-numeric: tabular-nums;
+  }
 
   /* 순위 밑줄 포커스(네비와 동일 계열) */
-  .rank-under { position: relative; }
+  .rank-under {
+    position: relative;
+  }
+
   .rank-under::after {
     content: "";
     display: block;
@@ -156,28 +204,32 @@ body {
     width: 28px;
     margin-top: 6px;
     border-radius: 9999px;
-    background-image: linear-gradient(to right, #8b5cf6, #d946ef); /* violet-500 -> fuchsia-500 */
+    background-image: linear-gradient(to right, #8b5cf6, #d946ef);
+    /* violet-500 -> fuchsia-500 */
   }
-      /* 액션 칩(구매/장바구니/공유 공용) */
+
+  /* 액션 칩(구매/장바구니/공유 공용) */
   .chip-action {
-    @apply inline-flex items-center justify-center h-10 px-4 rounded-lg text-sm font-semibold
-           border border-neutral-300 bg-white text-neutral-800 shadow-sm
-           transition-all duration-200 ease-out;
+    @apply inline-flex items-center justify-center h-10 px-4 rounded-lg text-sm font-semibold border border-neutral-300 bg-white text-neutral-800 shadow-sm transition-all duration-200 ease-out;
     /* 살짝 떠오르는 느낌을 위한 초기 상태 */
     transform: translateY(0);
   }
+
   .chip-action:hover {
     @apply shadow-md;
     /* 호버 시 그라데이션로 전환 */
     color: #fff;
     border-color: transparent;
-    background-image: linear-gradient(to right, rgb(139 92 246), rgb(217 70 239)); /* violet→fuchsia */
+    background-image: linear-gradient(to right, rgb(139 92 246), rgb(217 70 239));
+    /* violet→fuchsia */
     transform: translateY(-1px);
   }
+
   .chip-action:active {
     transform: translateY(0);
     filter: brightness(0.98);
   }
+
   .chip-action:focus-visible {
     @apply outline-none ring-2 ring-violet-300;
   }

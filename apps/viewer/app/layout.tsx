@@ -1,36 +1,20 @@
 // apps/viewer/app/layout.tsx
 import "./globals.css";
-import TopNav from "@/components/design/TopNav"; // 클라 전용 분리
+import TopNav from "@features/TopNav"; // 클라 전용 분리
 import localFont from "next/font/local";
-import Footer from "@/components/design/Footer";
+import Footer from "@features/Footer";
 
-const nanumSquareRound = localFont({
-  src: [
-    { path: "../public/fonts/nanum-square-round/NanumSquareRoundL.ttf",  weight: "300", style: "normal" },
-    { path: "../public/fonts/nanum-square-round/NanumSquareRoundR.ttf",  weight: "400", style: "normal" },
-    { path: "../public/fonts/nanum-square-round/NanumSquareRoundB.ttf",  weight: "700", style: "normal" },
-    { path: "../public/fonts/nanum-square-round/NanumSquareRoundEB.ttf", weight: "800", style: "normal" },
-  ],
-  display: "swap",
-});
-const ellisDigitalCoding = localFont({
-  src: [
-    { path: "../public/fonts/elice/EliceDigitalCodingverH_Regular.ttf",  weight: "400", style: "normal" },
-    { path: "../public/fonts/elice/EliceDigitalCodingverH_Bold.ttf",  weight: "700", style: "normal" },
-  ],
-  display: "swap",
-});
 const payperlogy = localFont({
   src: [
-    { path: "../public/fonts/paperlogy/Paperlogy-1Thin.ttf",  weight: "100", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-2ExtraLight.ttf",  weight: "200", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-3Light.ttf",  weight: "300", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-4Regular.ttf",  weight: "400", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-5Medium.ttf",  weight: "500", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-6SemiBold.ttf",  weight: "600", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-7Bold.ttf",  weight: "700", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-8ExtraBold.ttf",  weight: "800", style: "normal" },
-    { path: "../public/fonts/paperlogy/Paperlogy-9Black.ttf",  weight: "900", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-1Thin.ttf", weight: "100", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-2ExtraLight.ttf", weight: "200", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-3Light.ttf", weight: "300", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-4Regular.ttf", weight: "400", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-5Medium.ttf", weight: "500", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-6SemiBold.ttf", weight: "600", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-7Bold.ttf", weight: "700", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-8ExtraBold.ttf", weight: "800", style: "normal" },
+    { path: "../public/fonts/paperlogy/Paperlogy-9Black.ttf", weight: "900", style: "normal" },
   ],
   display: "swap",
 });

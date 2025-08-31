@@ -1,28 +1,29 @@
-// apps/viewer/components/viewer/ViewerClient.tsx
-"use client";
+// apps/viewer/features/ViewerClient.tsx
 
-import { useEffect, useState } from "react";
+"use client";
 import Link from "next/link";
-import { Badge, Section } from "../ui";
-import { LiveCard } from "./LiveCard";
-import { liveCards } from "../data";
+import { useEffect, useState } from "react";
+import { iconMap } from "@components/iconMap";
+import { Section, InfoBadge } from "@components/uiUtile";
+import { LiveCard } from "@features/LiveCard";
+import { liveCards } from "@components/data";
 
 type Props = { liveId: string };
 
-/* 공통 액션 버튼 묶음 (가운데 정렬) */
 function ActionButtons({ className = "" }: { className?: string }) {
   return (
-<div className={`flex items-center justify-between gap-2 ${className}`}>
-  <button className="chip-action flex-1">구매하기</button>
-  <button className="chip-action flex-1">장바구니</button>
-  <button className="chip-action flex-1">공유</button>
-</div>
-
+    <div className={`flex items-center justify-between gap-2 ${className}`}>
+      <button className="chip-action flex-1">구매하기</button>
+      <button className="chip-action flex-1">장바구니</button>
+      <button className="chip-action flex-1">공유</button>
+    </div>
   );
 }
 
 export default function ViewerClient({ liveId }: Props) {
+
   const [chatOpen, setChatOpen] = useState(false);
+  const Icon = iconMap["message-circle-more"];
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && setChatOpen(false);
@@ -32,19 +33,24 @@ export default function ViewerClient({ liveId }: Props) {
 
   return (
     <div className="grid grid-cols-1 gap-4 md:grid-cols-12">
-      {/* ===== 좌측: 플레이어 + 설명 ===== */}
       <div className="overflow-hidden rounded-2xl border border-neutral-200 bg-white md:col-span-8">
-        {/* ▶︎ 플레이어 */}
+
+        {/* 방송 화면 */}
         <div className="relative aspect-[9/16] bg-black md:aspect-video">
           <div className="absolute left-3 top-3 z-10">
             <span className="pill-live">LIVE</span>
           </div>
+          {/* ===== 하단: 채팅 패널 (모바일) ===== */}
           <button
-            onClick={() => setChatOpen((v) => !v)}
-            className="absolute left-3 bottom-3 z-10 h-10 rounded-full bg-black/60 px-3 text-sm text-white backdrop-blur-sm md:hidden"
+            onClick={() => setChatOpen(v => !v)}
+            className="absolute z-10 grid h-12 w-12 place-items-center rounded-full bg-black/60 text-white backdrop-blur-sm md:hidden"
+            style={{
+              left: 'max(0.25rem, env(safe-area-inset-left))',
+              bottom: 'max(0.5rem, env(safe-area-inset-bottom))',
+            }}
             aria-label="채팅 열기"
           >
-            💬 채팅
+            {Icon ? <Icon className="w-6 h-6 shrink-0" aria-hidden /> : null}
           </button>
           {chatOpen && (
             <div className="absolute inset-0 z-20 flex flex-col justify-end bg-black/30 md:hidden">
@@ -64,10 +70,10 @@ export default function ViewerClient({ liveId }: Props) {
 
           {/* 방송 설명 */}
           <div className="text-sm text-neutral-600">
-            방송 설명이 들어갑니다.ㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈㅈ (정적 문구 — hydration 이슈 방지를 위해 랜덤/날짜 미사용)
+            방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. 방송 설명이 들어갑니다. (정적 문구 — hydration 이슈 방지를 위해 랜덤/날짜 미사용)
           </div>
 
-          {/* ✅ 모바일에서만 방송설명 밑에 표시 */}
+          {/* 모바일에서만 방송설명 밑에 표시 */}
           <div className="md:hidden">
             <ActionButtons className="mt-12" />
           </div>
@@ -102,6 +108,7 @@ export default function ViewerClient({ liveId }: Props) {
 
 /* ---------------- 채팅 서브 컴포넌트 ---------------- */
 function ChatPanel() {
+
   const [tab, setTab] = useState<"chat" | "info">("chat");
 
   return (
@@ -126,13 +133,13 @@ function ChatPanel() {
       ) : (
         <div className="flex-1 space-y-2 overflow-auto p-3 text-sm text-neutral-700">
           <div>
-            <Badge>판매자</Badge> 고운 수박 공식 스토어
+            <InfoBadge>판매자</InfoBadge> 고운 수박 공식 스토어
           </div>
           <div>
-            <Badge>배송</Badge> 당일 출고 (영업일 기준)
+            <InfoBadge>배송</InfoBadge> 당일 출고 (영업일 기준)
           </div>
           <div>
-            <Badge>교환/환불</Badge> 수령 7일 이내 가능
+            <InfoBadge>교환/환불</InfoBadge> 수령 7일 이내 가능
           </div>
         </div>
       )}
@@ -144,7 +151,7 @@ function ChatPanel() {
 
 /* ---------------- 채팅 메시지 ---------------- */
 const MOCK = [
-  { name: "수박버", text: "🍉 수박 달콤해요!" },
+  { name: "수박버", text: "수박 달콤해요!" },
   { name: "여름최고", text: "할인 언제 시작해요?" },
   { name: "고박", text: "잠시 후 특가 공개됩니다!" },
 ];

@@ -1,7 +1,8 @@
 // apps/viewer/app/live/[id]/page.tsx
-import ViewerClient from "@/components/design/ViewerClient";
+
+import ViewerClient from "@features/ViewerClient";
 
 export default async function LivePage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params; // ✅ Promise 풀어주기
+  const { id } = await params;
   return <ViewerClient liveId={id} />;
 }
