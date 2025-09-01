@@ -14,17 +14,16 @@ export default function Layout({ children }: PropsWithChildren) {
     const notice = useNoticeStore((s) => s.notices[0]);
 
     return (
-        <div className="min-h-screen bg-gray-100">
+        <div className="h-screen w-full overflow-auto">
             <Header />
 
             {/* 좌(260) - 본문(auto) - 우(220) */}
-            <div className="flex">
+            <div className="flex min-w-[1680px]">
                 {!collapsed && <Sidebar />}
 
                 {/* 본문: 패딩으로 좌측 라인 기준을 만든다 */}
-                <main className="flex-1 min-w-0 p-5">
-                    {/* 공지 + 토글을 같은 라인에 배치.
-              좌측 정렬선은 본문 padding 기준이라 아래 카드들과 동일함 */}
+                <main className="flex-1 min-w-[1200px] p-5">
+                    {/* 공지 + 토글을 같은 라인에 배치. 좌측 정렬선은 본문 padding 기준이라 아래 카드들과 동일함 */}
                     <div className="mb-4 flex items-stretch gap-3">
                         <button
                             onClick={toggleSidebar}

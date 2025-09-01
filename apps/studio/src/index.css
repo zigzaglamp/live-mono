@@ -1,6 +1,11 @@
 /* 1) 무조건 최상단 */
 @import "tailwindcss";
 
+html, body, #root {
+  height: 100%;
+  overflow: hidden;   /* 페이지 자체 스크롤 막기 → 레이아웃 컨테이너가 스크롤 담당 */
+}
+
 /* 2) 로컬 폰트 등록 (@font-face) */
 @font-face {
   font-family: "Paperlogy";
