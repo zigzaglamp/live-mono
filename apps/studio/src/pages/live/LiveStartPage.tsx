@@ -15,6 +15,7 @@ import {
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import CollapseCard from "@/components/CollapseCard";
+import StepGauge from "@/components/StepGauge";
 
 type LayoutMode = "single" | "switching" | "pip";
 
@@ -32,8 +33,8 @@ const mockReadyList: ReadyBroadcast[] = [
 export default function LiveStartPage() {
     const navigate = useNavigate();
 
-    // 진행 단계: 0=레이아웃/방송선택, 1=장비설정, 2=미리보기/상태
-    const [step, setStep] = useState(0);
+    // ✅ 1부터 시작 (초기 진입 시 1단계가 바로 활성)
+    const [step, setStep] = useState<number>(1);
 
     // 1) 레이아웃 + 방송 선택
     const [layout, setLayout] = useState<LayoutMode>("single");
@@ -50,8 +51,6 @@ export default function LiveStartPage() {
     // PiP
     const [pipMain, setPipMain] = useState("main-cam");
     const [pipSub, setPipSub] = useState("sub-cam");
-
-    const stepRatio = useMemo(() => ((step + 1) / 3) * 100, [step]); // 33, 66, 100%
 
     const canNextFrom1 = useMemo(() => {
         // 조건: 방송 선택(사전설정 or 즉석제목) + 레이아웃 선택
@@ -71,18 +70,7 @@ export default function LiveStartPage() {
             ? adhocTitle || "(제목 미정)"
             : mockReadyList.find((b) => b.id === selectedReadyId)?.title || "(미선택)";
 
-    // const openCentered = (url: string, name: string, w: number, h: number) => {
-    //     const left = window.screenX + (window.outerWidth - w) / 2;
-    //     const top = window.screenY + (window.outerHeight - h) / 2;
-    //     window.open(url, name, `popup=yes,width=${w},height=${h},left=${left},top=${top}`);
-    // };
-
     const handleStart = () => {
-        // 팝업 예시: 실제 구현 시 각 경로에 맞는 페이지 준비
-        //openCentered("/onair/view", "onair_view", 1200, 700);
-        //openCentered("/onair/chat", "onair_chat", 420, 720);
-        //openCentered("/onair/products", "onair_products", 560, 720);
-        //openCentered("/onair/coupons", "onair_coupons", 420, 600);
         navigate("/liveOnAirHub", {
             state: {
                 layout,
@@ -98,27 +86,19 @@ export default function LiveStartPage() {
             <h1 className="mb-1 text-xl font-bold">방송 시작</h1>
             <p className="text-sm text-slate-500">단계별로 설정을 완료하고 방송을 시작하세요.</p>
 
-            {/* 상단 진행 게이지 */}
-            <div className="relative h-3 w-full overflow-hidden rounded-full bg-slate-200">
-                <div
-                    className="h-full rounded-full"
-                    style={{
-                        width: `${stepRatio}%`,
-                        background:
-                            "linear-gradient(90deg, rgba(16,185,129,0.9) 0%, rgba(59,130,246,0.9) 100%)",
-                        transition: "width 500ms ease",
-                    }}
-                />
-                <div className="shimmer absolute inset-0" />
-            </div>
-            <div className="flex items-center justify-between text-xs text-slate-500">
-                <span>1단계 레이아웃/방송 선택</span>
-                <span>2단계 장비 설정</span>
-                <span>3단계 미리보기/상태</span>
-            </div>
+            {/* 상단 진행 게이지 (라벨이 영역 밖으로 안나가도록 가드/오프셋 부여) */}
+            
+            <StepGauge
+                current={step} // 1, 2, 3
+                steps={[
+                    { label: "1단계 레이아웃/방송 설정" },
+                    { label: "2단계 장비/품질 설정" },
+                    { label: "3단계 미리보기/상태" },
+                ]}
+            />
 
             {/* STEP 1 */}
-            {step === 0 && (
+            {step === 1 && (
                 <div className="space-y-6">
                     <CollapseCard title="화면 레이아웃 선택" defaultOpen>
                         <div className="grid grid-cols-3 gap-4">
@@ -150,10 +130,7 @@ export default function LiveStartPage() {
                                 <div className="mb-2 text-sm font-medium text-slate-800">사전설정 목록</div>
                                 <div className="divide-y rounded border border-gray-300 bg-white">
                                     {mockReadyList.map((b) => (
-                                        <label
-                                            key={b.id}
-                                            className="flex cursor-pointer items-center gap-3 px-4 py-2 text-sm"
-                                        >
+                                        <label key={b.id} className="flex cursor-pointer items-center gap-3 px-4 py-2 text-sm">
                                             <input
                                                 type="radio"
                                                 name="readyPick"
@@ -187,9 +164,7 @@ export default function LiveStartPage() {
                                             setSelectedReadyId("adhoc");
                                         }}
                                     />
-                                    <p className="mt-2 text-xs text-slate-500">
-                                        * 사전설정 없이도 바로 진행할 수 있습니다.
-                                    </p>
+                                    <p className="mt-2 text-xs text-slate-500">* 사전설정 없이도 바로 진행할 수 있습니다.</p>
                                 </div>
                             </div>
                         </div>
@@ -198,8 +173,8 @@ export default function LiveStartPage() {
                     <NavButtons
                         leftLabel="이전"
                         rightLabel="다음"
-                        onLeft={() => setStep(0)}
-                        onRight={() => canNextFrom1 && setStep(1)}
+                        onLeft={() => setStep(1)}
+                        onRight={() => canNextFrom1 && setStep(2)}
                         leftDisabled
                         rightDisabled={!canNextFrom1}
                     />
@@ -207,7 +182,7 @@ export default function LiveStartPage() {
             )}
 
             {/* STEP 2 */}
-            {step === 1 && (
+            {step === 2 && (
                 <div className="space-y-6">
                     <CollapseCard title="장비/품질 설정" defaultOpen>
                         {/* 공통 */}
@@ -301,15 +276,15 @@ export default function LiveStartPage() {
                     <NavButtons
                         leftLabel="이전"
                         rightLabel="다음"
-                        onLeft={() => setStep(0)}
-                        onRight={() => canNextFrom2 && setStep(2)}
+                        onLeft={() => setStep(1)}
+                        onRight={() => canNextFrom2 && setStep(3)}
                         rightDisabled={!canNextFrom2}
                     />
                 </div>
             )}
 
             {/* STEP 3 */}
-            {step === 2 && (
+            {step === 3 && (
                 <div className="space-y-6">
                     <CollapseCard title="미리보기 / 상태" defaultOpen>
                         <div className="grid grid-cols-2 gap-5">
@@ -362,14 +337,14 @@ export default function LiveStartPage() {
                     <NavButtons
                         leftLabel="이전"
                         rightLabel="시작"
-                        onLeft={() => setStep(1)}
+                        onLeft={() => setStep(2)}
                         onRight={handleStart}
                         rightIcon={<Power size={16} />}
                     />
                 </div>
             )}
 
-            {/* 게이지 반짝 효과 */}
+            {/* 게이지 반짝 효과 (구 버전 사용 시 남겨둠) */}
             <style>{`
         @keyframes shimmerMove {
           0% { transform: translateX(-100%); }
@@ -404,7 +379,7 @@ function LayoutCard({
             type="button"
             onClick={onClick}
             className={[
-                "h-28 w-full rounded-lg border p-4 text-left transition-colors",
+                "h-28 w-full border p-4 text-left transition-colors",
                 active ? "border-emerald-300 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50",
             ].join(" ")}
         >
