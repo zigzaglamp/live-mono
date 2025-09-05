@@ -71,11 +71,11 @@ export default function LiveStartPage() {
             ? adhocTitle || "(제목 미정)"
             : mockReadyList.find((b) => b.id === selectedReadyId)?.title || "(미선택)";
 
-    const openCentered = (url: string, name: string, w: number, h: number) => {
-        const left = window.screenX + (window.outerWidth - w) / 2;
-        const top = window.screenY + (window.outerHeight - h) / 2;
-        window.open(url, name, `popup=yes,width=${w},height=${h},left=${left},top=${top}`);
-    };
+    // const openCentered = (url: string, name: string, w: number, h: number) => {
+    //     const left = window.screenX + (window.outerWidth - w) / 2;
+    //     const top = window.screenY + (window.outerHeight - h) / 2;
+    //     window.open(url, name, `popup=yes,width=${w},height=${h},left=${left},top=${top}`);
+    // };
 
     const handleStart = () => {
         // 팝업 예시: 실제 구현 시 각 경로에 맞는 페이지 준비

@@ -395,6 +395,7 @@ export default function ProductDescriptionEditorPage() {
         editorProps: {
             attributes: { class: "tiptap prose-sm max-w-none focus:outline-none" },
             handleKeyDown(view, event) {
+                void view;
                 if (event.key === "Tab") {
                     event.preventDefault();
                     const inList = editor?.isActive("bulletList") || editor?.isActive("orderedList");
@@ -495,11 +496,11 @@ export default function ProductDescriptionEditorPage() {
     const setHighlight = (c: string) => editor?.chain().focus().toggleHighlight({ color: c }).run();
 
     /* 표 중앙/꽉채우기 도움 함수 (원하면 버튼에 연결) */
-    const centerTable = () =>
-        editor?.chain().focus().updateAttributes('table', { align: 'center', width: 'auto' }).run();
+    // const centerTable = () =>
+    //     editor?.chain().focus().updateAttributes('table', { align: 'center', width: 'auto' }).run();
 
-    const stretchTable = () =>
-        editor?.chain().focus().updateAttributes('table', { align: null, width: '100%' }).run();
+    // const stretchTable = () =>
+    //     editor?.chain().focus().updateAttributes('table', { align: null, width: '100%' }).run();
 
     // 버튼 핸들러
     const toggleTableCenter = () => {

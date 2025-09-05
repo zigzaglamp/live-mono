@@ -6,34 +6,6 @@ import {
     Package, ShoppingCart, Wallet, MessageSquare, Radio, Settings
 } from "lucide-react";
 
-// function SideLink({ to, label, badge, Icon }: { to: string; label: string; badge?: string; Icon?: React.ComponentType<{ size?: number, className?: string }>; }) {
-//     return (
-//         <NavLink
-//             to={to}
-//             className={({ isActive }) =>
-//                 `group flex w-full items-center justify-between px-4 py-2 text-left text-[13px] ${isActive ? "bg-slate-600 text-white" : "text-slate-100 hover:bg-slate-600"
-//                 }`
-//             }
-//         >
-//             <span className="truncate flex items-center gap-2">
-//                 {Icon && <Icon size={16} className="opacity-90" />}
-//                 {label}
-//             </span>
-//             {badge && (
-//                 <span className="rounded-sm bg-emerald-400/20 px-1.5 py-0.5 text-[10px] text-emerald-200">{badge}</span>
-//             )}
-//         </NavLink>
-//     );
-// }
-
-function NewBadge({ children }: { children: React.ReactNode }) {
-    return (
-        <span className="inline-flex h-5 items-center justify-center rounded-full px-2 text-[10px] font-semibold bg-red-500/15 text-red-200 ring-1 ring-inset ring-red-400/30">
-            {children}
-        </span>
-    );
-}
-
 function SideLink({
     to, label, badge, Icon,
 }: {

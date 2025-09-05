@@ -77,8 +77,6 @@ export default function LiveListPage() {
         }
     };
 
-    const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
-
     return (
         <div className="space-y-6">
             {/* 헤더 */}
