@@ -1,0 +1,547 @@
+/* ===== 톤 살짝 연하게 (border down) ===== */
+.ne-page {
+  --ne-border: #cbd5e1;
+  /* slate-300 */
+  --ne-border-strong: #94a3b8;
+  /* slate-400 */
+  --ne-bg: #fafafa;
+  --ne-surface: #ffffff;
+  --ne-ink: #0f172a;
+  --ne-muted: #6b7280;
+  --ne-primary: #10b981;
+  --ne-primary-600: #059669;
+}
+
+/* ============= Header ============= */
+.ne-header {
+  border-bottom: 1px solid var(--ne-border-strong);
+}
+
+.ne-header__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ne-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 14px;
+}
+
+.ne-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* ===== 트리플 액션 버튼 (목록/저장/등록) ===== */
+.ne-actions--triple {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.ne-btn3 {
+  --_w: 96px;
+  height: 34px;
+  width: var(--_w);
+  border: 1px solid var(--ne-border-strong);
+  background: #fff;
+  color: #111827;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.ne-btn3:hover {
+  background: var(--ne-primary-600);
+  color: #fff;
+}
+
+.ne-btn3[disabled] {
+  opacity: .6;
+  cursor: not-allowed;
+}
+
+.ne-btn3__label {
+  line-height: 1;
+}
+
+.ne-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 18px;
+  height: 18px;
+  font-size: 11px;
+  padding: 0 4px;
+  margin-left: 4px;
+  border: 1px dotted var(--ne-border-strong);
+  color: #111827;
+  background: #fff;
+}
+
+/* ============= Toolbar ============= */
+.ne-toolbar {
+  border-bottom: 1px solid var(--ne-border);
+  background: var(--ne-surface);
+}
+
+.ne-toolbar__inner {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 8px 16px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.ne-group {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px;
+  border: 1px solid var(--ne-border);
+  background: #fff;
+}
+
+.ne-divider {
+  width: 1px;
+  height: 18px;
+  background: var(--ne-border);
+  margin: 0 2px;
+}
+
+/* 아이콘 버튼 (라운딩 제거) */
+.ne-btn {
+  width: 32px;
+  height: 28px;
+  border: 1px solid var(--ne-border-strong);
+  background: #fff;
+  display: inline-grid;
+  place-items: center;
+  cursor: pointer;
+}
+
+.ne-btn:hover {
+  background: var(--ne-hover);
+}
+
+.ne-btn.is-active {
+  background: #eef2ff;
+  border-color: #475569;
+}
+
+/* select & color chips */
+.ne-select {
+  height: 28px;
+  border: 1px solid var(--ne-border-strong);
+  background: #fff;
+  padding: 0 8px;
+  font-size: 13px;
+  outline: none;
+}
+
+.ne-select:focus {
+  outline: 2px solid #93c5fd33;
+}
+
+.ne-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 28px;
+  border: 1px solid var(--ne-border-strong);
+  background: #fff;
+  padding: 0 6px;
+}
+
+.ne-chip input[type="color"] {
+  width: 18px;
+  height: 18px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.ne-chip__clear {
+  display: inline-grid;
+  place-items: center;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+/* ============= Editor Area ============= */
+.ne-editor {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.ne-editor__paper {
+  background: #fff;
+  border: 1px solid var(--ne-border-strong);
+  border-radius: 0;
+  min-height: calc(100vh - 180px);
+  padding: 16px;
+  overflow-x: auto;
+  /* 테이블이 넓으면 가로 스크롤 */
+}
+
+/* ============= TipTap content ============= */
+.tiptap {
+  line-height: 1.7;
+  font-size: 15px;
+  color: #0f172a;
+  background: transparent;
+  border: none;
+  padding: 4px;
+}
+
+/* headings / paragraphs */
+.tiptap p {
+  margin: .55rem 0;
+}
+
+.tiptap h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 1rem 0 .75rem;
+}
+
+.tiptap h2 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: .9rem 0 .6rem;
+}
+
+.tiptap h3 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin: .75rem 0 .5rem;
+}
+
+/* lists */
+.tiptap ul,
+.tiptap ol {
+  padding-left: 1.25rem;
+  margin: .5rem 0;
+}
+
+.tiptap ul {
+  list-style: disc;
+}
+
+.tiptap ol {
+  list-style: decimal;
+}
+
+.tiptap li {
+  margin: .25rem 0;
+}
+
+.tiptap li>ul,
+.tiptap li>ol {
+  margin: .25rem 0;
+}
+
+/* indent utility */
+.tiptap p.indent-1,
+.tiptap h1.indent-1,
+.tiptap h2.indent-1,
+.tiptap h3.indent-1 {
+  margin-left: 1.5rem;
+}
+
+.tiptap p.indent-2,
+.tiptap h1.indent-2,
+.tiptap h2.indent-2,
+.tiptap h3.indent-2 {
+  margin-left: 3rem;
+}
+
+.tiptap p.indent-3,
+.tiptap h1.indent-3,
+.tiptap h2.indent-3,
+.tiptap h3.indent-3 {
+  margin-left: 4.5rem;
+}
+
+.tiptap p.indent-4,
+.tiptap h1.indent-4,
+.tiptap h2.indent-4,
+.tiptap h3.indent-4 {
+  margin-left: 6rem;
+}
+
+.tiptap p.indent-5,
+.tiptap h1.indent-5,
+.tiptap h2.indent-5,
+.tiptap h3.indent-5 {
+  margin-left: 7.5rem;
+}
+
+.tiptap p.indent-6,
+.tiptap h1.indent-6,
+.tiptap h2.indent-6,
+.tiptap h3.indent-6 {
+  margin-left: 9rem;
+}
+
+.tiptap p.indent-7,
+.tiptap h1.indent-7,
+.tiptap h2.indent-7,
+.tiptap h3.indent-7 {
+  margin-left: 10.5rem;
+}
+
+.tiptap p.indent-8,
+.tiptap h1.indent-8,
+.tiptap h2.indent-8,
+.tiptap h3.indent-8 {
+  margin-left: 12rem;
+}
+
+/* links */
+.tiptap a {
+  color: #2563eb;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.tiptap a:hover {
+  color: #1d4ed8;
+}
+
+/* code */
+.tiptap code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  padding: .1rem .25rem;
+  border-radius: 2px;
+}
+
+.tiptap pre {
+  background: #0b1020;
+  color: #e5e7eb;
+  padding: .75rem 1rem;
+  border-radius: 0;
+  overflow: auto;
+  line-height: 1.5;
+  border: 1px solid var(--ne-border-strong);
+  margin: .75rem 0;
+}
+
+.tiptap pre code {
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: inherit;
+}
+
+/* quote / hr */
+.tiptap blockquote {
+  border-left: 4px solid #94A3B8;
+  padding: 8px 12px;
+  color: #334155;
+  background: #F8FAFC;
+  margin: .75rem 0;
+}
+
+.tiptap hr {
+  border: none;
+  border-top: 2px solid var(--ne-border-strong);
+  margin: 18px 0;
+}
+
+/* images */
+.tiptap img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.tiptap figure {
+  margin: .75rem 0;
+  text-align: center;
+}
+
+.tiptap figcaption {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 4px;
+}
+
+/* tables */
+.tiptap table {
+  width: auto;
+  /* 내용에 맞게 */
+  max-width: 100%;
+  /* 부모를 넘지 않게 */
+  border-collapse: collapse;
+  table-layout: fixed;
+  margin: .75rem 0;
+  position: relative;
+  /* 리사이즈 핸들 기준 */
+}
+
+/* 표 중앙 정렬 + 폭 제어 (TableX가 width 스타일을 쓰면 그 값이 우선) */
+.tiptap table.is-center {
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  /* 기본 100%를 이김 */
+  max-width: 100%;
+}
+
+.tiptap table th,
+.tiptap table td {
+  border: 1px solid var(--ne-border-strong);
+  padding: 8px;
+  vertical-align: middle;
+  word-break: break-word;
+  position: relative;
+  /* 리사이즈 핸들 기준 */
+}
+
+.tiptap table th {
+  background: #F3F4F6;
+  font-weight: 600;
+  text-align: left;
+}
+
+.tiptap .selectedCell {
+  outline: 2px solid #60A5FA;
+  outline-offset: -2px;
+}
+
+/* gap cursor */
+.ProseMirror-gapcursor {
+  display: inline-block;
+  position: relative;
+}
+
+.ProseMirror-gapcursor:after {
+  content: "";
+  position: absolute;
+  top: -0.5em;
+  bottom: -0.5em;
+  width: 1px;
+  background: #94a3b8;
+}
+
+/* placeholder */
+.tiptap p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #94a3b8;
+  float: left;
+  pointer-events: none;
+  height: 0;
+}
+
+/* text-align helpers */
+.tiptap .text-left {
+  text-align: left;
+}
+
+.tiptap .text-center {
+  text-align: center;
+}
+
+.tiptap .text-right {
+  text-align: right;
+}
+
+.tiptap .text-justify {
+  text-align: justify;
+}
+
+/* mention */
+.tiptap .mention {
+  background: #eef2ff;
+  color: #3730a3;
+  padding: 2px 4px;
+}
+
+/* mention dropdown */
+.tiptap-mention-list {
+  min-width: 160px;
+  z-index: 9999;
+  background: #fff;
+  border: 1px solid var(--ne-border-strong);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, .06);
+  padding: 4px;
+}
+
+.tiptap-mention-item {
+  width: 100%;
+  text-align: left;
+  padding: 6px 10px;
+  font-size: 13px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.tiptap-mention-item:hover,
+.tiptap-mention-item.is-active {
+  background: #EFF6FF;
+  color: #1D4ED8;
+}
+
+/* ===== TipTap table resize (column drag) ===== */
+.ProseMirror {
+  position: relative;
+}
+
+.ProseMirror .column-resize-handle {
+  position: absolute;
+  right: -2px;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  cursor: col-resize;
+}
+
+.ProseMirror .column-resize-handle:hover {
+  background: rgba(59, 130, 246, 0.25);
+  /* blue-500 / 25% */
+}
+
+body.resize-cursor {
+  cursor: col-resize !important;
+}
+
+/* wrapper를 flex로 두고 가운데 정렬 지원 */
+.tiptap .tableWrapper {
+  display: flex;
+  justify-content: flex-start;
+  overflow-x: auto;
+}
+
+.tiptap .tableWrapper.is-center {
+  justify-content: center;
+}
+
+/* table은 내용 폭에 맞추되, 100% 지정 시 꽉 채움 */
+.tiptap .tableWrapper>table {
+  width: auto !important;
+  max-width: 100%;
+  margin: .75rem 0 !important;
+}

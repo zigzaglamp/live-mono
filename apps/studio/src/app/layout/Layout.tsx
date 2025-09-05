@@ -1,6 +1,6 @@
 // src/app/layout/Layout.tsx
 
-import { type PropsWithChildren } from "react";
+import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import Sidebar from "./Sidebar";
 import RightRail from "./RightRail";
@@ -8,7 +8,7 @@ import { useUIStore } from "../../store/ui";
 import { useNoticeStore } from "../../store/notice";
 import { MoveLeft, MoveRight } from "lucide-react";
 
-export default function Layout({ children }: PropsWithChildren) {
+export default function Layout() {
     const collapsed = useUIStore((s) => s.sidebarCollapsed);
     const toggleSidebar = useUIStore((s) => s.toggleSidebar);
     const notice = useNoticeStore((s) => s.notices[0]);
@@ -42,7 +42,7 @@ export default function Layout({ children }: PropsWithChildren) {
                         </div>
                     </div>
 
-                    {children}
+                    <Outlet />
                 </main>
 
                 {/* 우측 고정 영역(좌측처럼 컬럼 확보) */}
